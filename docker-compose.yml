@@ -6,4 +6,4 @@ services:
       - ./backend:/backend
     ports:
       - 3000:3000
-    command: bash -c "cd /backend && yarn install && yarn run dev"
+    command: bash -c "cd /backend && yarn install && yarn run start"
