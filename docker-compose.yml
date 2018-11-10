@@ -1,16 +1,18 @@
 version: '3'
 services:
-  # backend:
-  #   image: node:10.13.0
-  #   volumes:
-  #     - ./backend:/backend
-  #   ports:
-  #     - 3000:3000
-  #   command: bash -c "cd /backend && yarn install && yarn run start"
+  backend:
+    image: node:10.13.0
+    volumes:
+      - ./backend:/backend
+    ports:
+      - 3000:3000
+    command: bash -c "cd /backend && yarn install && yarn run start"
   frontend:
     image: node:10.13.0
     volumes:
       - ./frontend:/frontend
     ports:
-      - 3000:3000
+      - 3001:3000
     command: bash -c "cd /frontend && yarn install && yarn start"
+    depends_on:
+      - backend
