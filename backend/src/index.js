@@ -7,8 +7,12 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
+// Escolha a url pelo banco na nuvem ou pelo docker
+// const urlConnect = 'mongodb://goweek:goweek123@ds049651.mlab.com:49651/goweek-backend';
+const urlConnect = 'mongodb://db/goweek-backend';
+
 mongoose.connect(
-    'mongodb://goweek:goweek123@ds049651.mlab.com:49651/goweek-backend', 
+    urlConnect, 
     {
         useNewUrlParser: true 
     }

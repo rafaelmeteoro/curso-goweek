@@ -1,5 +1,7 @@
 version: '3'
 services:
+  db:
+    image: mongo:3.4
   backend:
     image: node:10.13.0
     volumes:
@@ -7,12 +9,15 @@ services:
     ports:
       - 3000:3000
     command: bash -c "cd /backend && yarn install && yarn run start"
-  # frontend:
-  #   image: node:10.13.0
-  #   volumes:
-  #     - ./frontend:/frontend
-  #   ports:
-  #     - 3001:3000
-  #   command: bash -c "cd /frontend && yarn install && yarn start"
-  #   depends_on:
-  #     - backend
+    depends_on:
+      - db
+  frontend:
+    image: node:10.13.0
+    volumes:
+      - ./frontend:/frontend
+    ports:
+      - 3001:3000
+    command: bash -c "cd /frontend && yarn install && yarn start"
+    depends_on:
+      - db
+      - backend
