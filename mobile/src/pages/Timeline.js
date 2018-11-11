@@ -7,7 +7,8 @@ import {
     Text,
     TouchableOpacity,
     StyleSheet,
-    FlatList
+    FlatList,
+    Platform
 } from 'react-native';
 
 import Tweet from '../components/Tweet';
@@ -43,7 +44,8 @@ export default class Timeline extends Component {
     };
 
     subscribeToEvents = () => {
-        const io = socket('http://localhost:3000');
+        const baseURL = Platform.OS === 'ios' ? 'http://localhost:3000' : 'http://10.0.2.2:3000'
+        const io = socket(baseURL);
 
         io.on('tweet', data => {
             this.setState({ tweets: [data, ...this.state.tweets] });
@@ -75,4 +77,3 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFF"
     }
 });
-  
